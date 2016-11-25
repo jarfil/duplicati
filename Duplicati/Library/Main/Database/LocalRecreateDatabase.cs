@@ -197,6 +197,22 @@ namespace Duplicati.Library.Main.Database
             m_insertDuplicateBlockCommand.CommandText = @"INSERT INTO ""DuplicateBlock"" (""BlockID"", ""VolumeID"") VALUES ((SELECT ""ID"" FROM ""Block"" WHERE ""Hash"" = ? AND ""Size"" = ?), ?)";
             m_insertDuplicateBlockCommand.AddParameters(3);
 
+            m_insertFileCommand.Prepare();
+            m_insertFilesetEntryCommand.Prepare();
+            m_insertMetadatasetCommand.Prepare();
+            m_insertBlocksetCommand.Prepare();
+            m_insertBlocklistHashCommand.Prepare();
+            m_updateBlockVolumeCommand.Prepare();
+            m_insertBlockset.Prepare();
+            m_insertSmallBlockset.Prepare();
+            m_findBlocksetCommand.Prepare();
+            m_findMetadatasetCommand.Prepare();
+            m_findFilesetCommand.Prepare();
+            m_findblocklisthashCommand.Prepare();
+            m_findHashBlockCommand.Prepare();
+            m_insertBlockCommand.Prepare();
+            m_insertDuplicateBlockCommand.Prepare();
+
             if (options.BlockHashLookupMemory > 0)
             {
                 m_blockHashLookup = new HashLookupHelper<long>((ulong)options.BlockHashLookupMemory/2);
