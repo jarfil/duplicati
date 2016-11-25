@@ -134,6 +134,9 @@ namespace Duplicati.Library.Main.Database
                 cmd.ExecuteNonQuery(string.Format(@"CREATE TEMPORARY TABLE ""{0}"" (""FileHash"" TEXT NOT NULL, ""BlockHash"" TEXT NOT NULL, ""BlockSize"" INTEGER NOT NULL)", m_tempsmalllist));
                 cmd.ExecuteNonQuery(string.Format(@"CREATE UNIQUE INDEX ""Index_File_{0}"" ON ""{0}"" (""FileHash"", ""BlockSize"");", m_tempsmalllist));
                 cmd.ExecuteNonQuery(string.Format(@"CREATE UNIQUE INDEX ""Index_Block_{0}"" ON ""{0}"" (""BlockHash"", ""BlockSize"");", m_tempsmalllist));
+
+                cmd.ExecuteNonQuery("PRAGMA synchronous = OFF;");
+                cmd.ExecuteNonQuery("PRAGMA journal_mode = MEMORY;");
             }
 
             m_insertFileCommand = m_connection.CreateCommand();
